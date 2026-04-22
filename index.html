@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectraGravity | Election Education App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="gravity-container">
+        <nav class="glass-nav">
+            <div class="logo">Electra<span>Gravity</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#simulation">Simulation</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <!-- Hero Section -->
+            <section id="home" class="hero">
+                <h1 class="glitch-text" data-text="Decide the Future">Decide the Future</h1>
+                <p>Master the election process with an interactive gravity-defying experience.</p>
+                <div class="scroll-indicator"></div>
+            </section>
+
+            <!-- Election Process Section -->
+            <section id="process" class="section">
+                <h2 class="section-title">The 4 Pillars of Democracy</h2>
+                <div class="grid-container">
+                    <div class="gravity-card" id="card-registration">
+                        <div class="card-icon">📝</div>
+                        <h3>Voter Registration</h3>
+                        <p class="summary">The first step to making your voice heard.</p>
+                        <div class="expanded-content">
+                            <p>Citizens must register to vote to prove eligibility. This involves providing identification and proof of residence to local election officials.</p>
+                        </div>
+                    </div>
+                    <div class="gravity-card" id="card-campaign">
+                        <div class="card-icon">📢</div>
+                        <h3>Campaigning</h3>
+                        <p class="summary">How candidates share their vision.</p>
+                        <div class="expanded-content">
+                            <p>Candidates use debates, rallies, and advertisements to inform the public about their policies and earn trust before election day.</p>
+                        </div>
+                    </div>
+                    <div class="gravity-card" id="card-voting">
+                        <div class="card-icon">🗳️</div>
+                        <h3>Voting</h3>
+                        <p class="summary">The moment of decision.</p>
+                        <div class="expanded-content">
+                            <p>On election day, voters go to polling stations or use mail-in ballots to cast their secret vote for their preferred candidate.</p>
+                        </div>
+                    </div>
+                    <div class="gravity-card" id="card-counting">
+                        <div class="card-icon">📊</div>
+                        <h3>Counting</h3>
+                        <p class="summary">Ensuring every vote matters.</p>
+                        <div class="expanded-content">
+                            <p>Ballots are securely collected and tallied. Official results are certified only after rigorous verification processes.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Voting Simulation Section -->
+            <section id="simulation" class="section">
+                <h2 class="section-title">Voting Simulation</h2>
+                <div class="simulation-container glass-card">
+                    <div class="candidates-grid">
+                        <div class="candidate-item" onclick="castVote('Candidate A')">
+                            <div class="candidate-avatar" style="background-color: #6366f1;">A</div>
+                            <h4>Alex Rivera</h4>
+                            <p>Focus: Environment & Tech</p>
+                            <button class="vote-btn">Cast Vote</button>
+                        </div>
+                        <div class="candidate-item" onclick="castVote('Candidate B')">
+                            <div class="candidate-avatar" style="background-color: #ec4899;">B</div>
+                            <h4>Beatriz Kim</h4>
+                            <p>Focus: Education & Healthcare</p>
+                            <button class="vote-btn">Cast Vote</button>
+                        </div>
+                        <div class="candidate-item" onclick="castVote('Candidate C')">
+                            <div class="candidate-avatar" style="background-color: #f59e0b;">C</div>
+                            <h4>Casey Jones</h4>
+                            <p>Focus: Economy & Infrastructure</p>
+                            <button class="vote-btn">Cast Vote</button>
+                        </div>
+                    </div>
+                    <div class="results-panel">
+                        <h3>Live Results</h3>
+                        <div id="vote-bars">
+                            <!-- Bars dynamic via JS -->
+                        </div>
+                        <button id="reset-votes" class="secondary-btn">Reset Simulation</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz Section -->
+            <section id="quiz" class="section">
+                <h2 class="section-title">Knowledge Check</h2>
+                <div id="quiz-container" class="glass-card">
+                    <div id="quiz-header">
+                        <span id="question-count">Question 1 of 5</span>
+                        <div class="progress-bar"><div id="progress-fill"></div></div>
+                    </div>
+                    <div id="question-box">
+                        <h3 id="question-text">Loading question...</h3>
+                        <div id="options-container"></div>
+                    </div>
+                    <div id="quiz-feedback" class="hidden"></div>
+                    <div id="quiz-results" class="hidden text-center">
+                        <h2>Quiz Complete!</h2>
+                        <p>Your Score: <span id="final-score">0</span>/5</p>
+                        <button onclick="resetQuiz()" class="vote-btn">Try Again</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center">
+            <p>&copy; 2026 ElectraGravity. Education for a better tomorrow.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
