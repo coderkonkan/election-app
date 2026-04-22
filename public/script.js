@@ -27,25 +27,31 @@ const quizData = [
     }
 ];
 
-let currentVotes = {
-    'Candidate A': 0,
-    'Candidate B': 0,
-    'Candidate C': 0
-};
+let currentVotes = {}; // Loaded from server
 
 let currentQuestionIndex = 0;
 let score = 0;
 
 // --- Initialize ---
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     initGravityEffect();
     initProcessCards();
-    updateVoteUI();
+    await fetchVotes();
     renderQuestion();
     
     // Add reset listener
     document.getElementById('reset-votes').addEventListener('click', resetVotes);
 });
+
+async function fetchVotes() {
+    try {
+        const response = await fetch('/api/votes');
+        currentVotes = await response.json();
+        updateVoteUI();
+    } catch (error) {
+        console.error('Error fetching votes:', error);
+    }
+}
 
 // --- Gravity Engine ---
 function initGravityEffect() {
@@ -81,20 +87,30 @@ function initProcessCards() {
 }
 
 // --- Voting Simulation ---
-function castVote(candidate) {
-    currentVotes[candidate]++;
-    updateVoteUI();
-    
-    // Simple feedback effect
-    const btn = event.currentTarget.querySelector('.vote-btn');
-    const originalText = btn.innerText;
-    btn.innerText = "Voted! ✅";
-    btn.style.background = "#22c55e";
-    
-    setTimeout(() => {
-        btn.innerText = "Vote Again";
-        btn.style.background = "var(--primary)";
-    }, 1000);
+async function castVote(candidate) {
+    try {
+        const response = await fetch('/api/votes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ candidate })
+        });
+        const data = await response.json();
+        currentVotes = data.votes;
+        updateVoteUI();
+        
+        // Simple feedback effect
+        const btn = event.currentTarget.querySelector('.vote-btn');
+        const originalText = btn.innerText;
+        btn.innerText = "Voted! ✅";
+        btn.style.background = "#22c55e";
+        
+        setTimeout(() => {
+            btn.innerText = "Vote Again";
+            btn.style.background = "var(--primary)";
+        }, 1000);
+    } catch (error) {
+        console.error('Error casting vote:', error);
+    }
 }
 
 function updateVoteUI() {
@@ -121,9 +137,15 @@ function updateVoteUI() {
     }
 }
 
-function resetVotes() {
-    currentVotes = { 'Candidate A': 0, 'Candidate B': 0, 'Candidate C': 0 };
-    updateVoteUI();
+async function resetVotes() {
+    try {
+        const response = await fetch('/api/reset', { method: 'POST' });
+        const data = await response.json();
+        currentVotes = data.votes;
+        updateVoteUI();
+    } catch (error) {
+        console.error('Error resetting votes:', error);
+    }
 }
 
 // --- Quiz Module ---
