@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const DATA_FILE = path.join(__dirname, 'votes.json');
+const DATA_FILE = path.join('/tmp', 'votes.json');
 
 // Middleware
 app.use(cors());
